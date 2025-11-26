@@ -32,6 +32,7 @@ class UserController
     {
         $validator = Validator::make($request->all(),[
                     'email' => 'required|email|max:255',
+                    'NIK' => 'required|integer|digits:16',
                     'nama' => 'required|string|max:255',
                     'username' => 'required|string|max:255',
                     'id_jabatan' => 'required|integer',
@@ -47,6 +48,7 @@ class UserController
 
         $user = Users::create([
             'email' => $request->email,
+            'nama' => $request->NIK,
             'nama' => $request->nama,
             'username' => $request->username,
             'id_jabatan' => $request->id_jabatan,
@@ -63,6 +65,7 @@ class UserController
     {
         $validator = Validator::make($request->all(),[
                     'email' => 'sometimes|required|email|max:255',
+                    'NIK' => 'sometimes|required|integer|digits:16',
                     'nama' => 'sometimes|required|string|max:255',
                     'username' => 'sometimes|required|string|max:255',
                     'id_jabatan' => 'sometimes|required|integer',
@@ -79,6 +82,7 @@ class UserController
         $user->update([
             'email' => $request->email,
             'nama' => $request->nama,
+            'NIK' => $request->NIK,
             'username' => $request->username,
             'id_jabatan' => $request->id_jabatan,
             'password' => Hash::make($request->password)

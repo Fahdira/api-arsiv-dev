@@ -12,11 +12,11 @@ class AuthController
     public function login(Request $request) : JsonResponse
     {
         $request->validate([
-            'email' => 'required|email|max:255',
+            'NIK' => 'required|integer|digits:16',
             'password' => 'required|string|min:8|max:255',
         ]);
 
-        $user = Users::where('email', $request->email)->first();
+        $user = Users::where('NIK', $request->NIK)->first();
         if(!$user || !Hash::check($request->password, $user->password)){
             return response()->json([
                 'message' => 'The provided credentials are incorrect'
@@ -35,6 +35,7 @@ class AuthController
         $request->validate([
             'email' => 'required|email|unique:users,email|max:255',
             'nama' => 'required|string|max:255',
+            'NIK' => 'required|integer|digits:16',
             'username' => 'required|string|max:255',
             'id_jabatan' => 'required|integer',
             'password' => 'required|string|max:255',
@@ -43,6 +44,7 @@ class AuthController
         $user = Users::create([
             'email' => $request->email,
             'nama' => $request->nama,
+            'NIK' => $request->NIK,
             'username' => $request->username,
             'id_jabatan' => $request->id_jabatan,
             'password' => Hash::make($request->password),

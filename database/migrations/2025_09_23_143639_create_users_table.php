@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id'); // id integer [primary key]
+            $table->bigInteger('NIK')->unique();
             $table->string('email')->unique();
             $table->string('nama');
             $table->string('username');
